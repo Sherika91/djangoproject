@@ -1,13 +1,20 @@
 from django.contrib import admin
+from catalog.models import Product, Category
 
-from catalog.models import Student
+# My registered models
+# admin.site.register(Category)
+# admin.site.register(Product)
 
-# admin.site.register(Students)
+
+# My registered models with custom settings
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'category', 'description',)
+    search_fields = ('category',)
 
 
-@admin.register(Student)
-class StudentsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'surname', 'is_active',)
-    list_filter = ('is_active',)
-    search_fields = ('name', 'surname',)
-
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description', 'category', 'price',)
+    search_fields = ('name', 'category',)
+    list_filter = ('name', 'category', 'price',)
