@@ -1,61 +1,124 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skystore</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Album example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/album.css' %}" rel="stylesheet">
 </head>
-<body class="body">
-<div class="header">
-    <h5 class="my-0 mr-md-auto font-weight-normal text-light">Skystore</h5>
-    <nav class="navbar">
-        <a class="btn-btn-primary" role="button" href="/contacts/">Contact Us</a>
-    </nav>
-</div>
-<div class="hero-section">
-    <h1 class="hero-title">Skystore</h1>
-    <p class="hero-description">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы
-        хотели продать</p>
-</div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-sm-6 col-lg-4 pricing-card">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header pricing-card-header"><h4 class="my-0 font-weight-normal pricing-title">Удобный
-                    сервис рассылок</h4>
+
+<body>
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">Add some information about the album below, the author, or any other
+                        background context. Make it a few sentences long so folks can pick up some informative tidbits.
+                        Then, link them off to some social networking sites or contact information.</p>
                 </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-amount">$140</h1>
-                    <ul class="pricing-list">
-                        <li class="pricing-list-item">Неограниченная лицензия</li>
-                        <li class="pricing-list-item">Поддержка</li>
-                        <li class="pricing-list-item">Установка на сервер</li>
-                        <li class="pricing-list-item">Получение обновлений</li>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email me</a></li>
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-primary">Купить</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<footer class="footer">
-    <div class="container">
-        <div class="footer-links">
-            <a class="footer-link" href="#">Рассылки</a>
-            <a class="footer-link" href="#">Телеграм боты</a>
-            <a class="footer-link" href="#">Полезные утилиты</a>
-            <a class="footer-link" href="#">Веб-приложения</a>
-            <a class="footer-link" href="#">Микросервисы</a>
-        </div>
-        <h1 class="footer-logo">Skystore</h1>
-        <p class="footer-text">&copy; 2023 Skystore. All rights reserved.</p>
-        <div class="footer-links">
-            <a class="footer-link" href="#">Мы пишем</a>
-            <a class="footer-link" href="/contacts/">Контакты</a>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <strong>Album</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </div>
+</header>
+
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Album example</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
+                etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+            <p>
+                <a href="#" class="btn btn-primary my-2">Main call to action</a>
+                <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                {% for product in product_list %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-body">
+                                <p class="card-text">{{ product.name|title }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">{% if product.in_stock %}
+                                        In stock
+                                    {% else %}
+                                        Out of stock
+                                    {% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>&copy; 2023 - {% now 'Y' %}</p>
+    </div>
 </footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/holder.min.js' %}"></script>
 </body>
 </html>

@@ -37,6 +37,8 @@ class Command(BaseCommand):
         # Products creation.
         products_to_create = []
         for product in products:
+            category = Category.objects.get(category=product['category'])
+            product['category'] = category
             products_to_create.append(Product(**product))
 
         Product.objects.bulk_create(products_to_create)
