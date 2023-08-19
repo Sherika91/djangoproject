@@ -1,0 +1,65 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <!-- content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row gx-5">
+                <aside class="col-lg-6">
+                    <img class="card-img-top"
+                         src="/media/{{ product.image }}"
+                         alt="Card image cap"
+                         style="height: auto; width: 100%; display: block">
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h4 class="title text-dark">
+                            {{ product.name }}
+                        </h4>
+                        <div class="d-flex flex-row my-3">
+                            {% if product.in_stock %}
+                                <span class="text-success ms-2">In stock</span>
+                            {% else %}
+                                <span class="text-danger ms-2">Out of stock</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <span class="h5">{{ product.price|floatformat }} $</span>
+                        </div>
+
+                        <p>
+                            {{ product.description }}
+                        </p>
+
+                        <div class="row">
+                            <dt class="col-3">Type:</dt>
+                            <dd class="col-9">Regular</dd>
+
+                            <dt class="col-3">Color</dt>
+                            <dd class="col-9">Brown</dd>
+
+                            <dt class="col-3">Material</dt>
+                            <dd class="col-9">Cotton, Jeans</dd>
+
+                            <dt class="col-3">Brand</dt>
+                            <dd class="col-9">Reebook</dd>
+                        </div>
+
+                        <hr/>
+
+                        <div class="btn-group-lg">
+                            <a href="#" class="btn btn-warning shadow-0"> Buy now </a>
+                            <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add
+                                to
+                                cart </a>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+{% endblock %}
