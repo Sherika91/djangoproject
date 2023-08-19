@@ -33,4 +33,4 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-        ordering = ('name', 'category', 'price', 'date_created',)
+        ordering = ('name', 'category', 'price', 'date_created', 'in_stock',)
