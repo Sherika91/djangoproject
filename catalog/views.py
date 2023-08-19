@@ -3,7 +3,7 @@ from catalog.models import Product
 
 
 def index(requests):
-    product_list = Product.objects.all()[:3]
+    product_list = Product.objects.all().order_by('-in_stock')[:3]
     context = {
         'product_list': product_list,
         'title': 'Catalog',
@@ -35,11 +35,11 @@ def products(request):
     return render(request, 'catalog/products.html', context)
 
 
-# def chosen_product(request, pk):
-#     product = Product.objects.get(pk=pk)
-#     context = {
-#         'product_list': Product.objects.filter(category_id=pk),
-#         'title': f'{product}',
-#     }
-#
-#     return render(request, 'catalog/includes/inc_all_products.html', context)
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    context = {
+        'product': product,
+        'title': product.name,
+    }
+
+    return render(request, 'catalog/product_detail.html', context)
