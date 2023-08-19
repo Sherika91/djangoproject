@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     """Command for filling database with data."""
+
     def handle(self, *args, **options):
         Product.objects.all().delete()
         Category.objects.all().delete()
@@ -28,18 +29,23 @@ class Command(BaseCommand):
 
         # Categories creation.
         categories_to_create = []
+
         for category in categories_list:
-            categories_to_create.append(Category(**category))
+            categories_to_create.append(Category(category=category['category'],
+                                                 description=category['description']))
 
         Category.objects.bulk_create(categories_to_create)
         print('Categories Created!')
 
         # Products creation.
         products_to_create = []
+
         for product in products:
             category = Category.objects.get(category=product['category'])
-            product['category'] = category
-            products_to_create.append(Product(**product))
+            products_to_create.append(Product(name=product['name'],
+                                              description=product['description'],
+                                              category=category,
+                                              price=product['price']))
 
         Product.objects.bulk_create(products_to_create)
-        print('Products Added!')
+        print('Products Created!')
