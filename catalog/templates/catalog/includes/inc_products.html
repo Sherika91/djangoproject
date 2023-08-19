@@ -1,0 +1,32 @@
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow border-primary">
+        <img class="card-img-top"
+             src="/media/{{ product.image }}"
+             alt="Card image cap"
+             style="height: 350px; width: 100%; display: block">
+        <div class="card-body">
+            <p class="card-text">{{ product.name|title }}</p>
+            <p class="card-text">{{ product.price|floatformat }} $</p>
+            <hr>
+            <p class="card-text">{{ product.category }}</p>
+            <hr>
+            <p class="card-text">{{ product.description }}</p>
+
+            <div class="d-flex justify-content-between ">
+                <div class="btn-group-sm">
+                    <a href="{% url 'catalog:product_detail' product.id %}" type="button"
+                       class="btn btn-sm btn-outline-primary">View</a>
+                    <a href="/#/" type="button" class="btn btn-sm btn-outline-primary ">Add to
+                        cart</a>
+                </div>
+                <small class="text-success">{% if product.in_stock %}
+                    In stock
+                {% else %}
+                    <small class="text-danger">Out of stock</small>
+
+                {% endif %}
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
