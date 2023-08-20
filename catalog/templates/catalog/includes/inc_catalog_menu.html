@@ -1,8 +1,10 @@
-<div class="col-sm-4 offset-md-1 py-4">
-    <h4 class="text-white">Menu</h4>
-    <ul class="list-unstyled">
-        <li><a href="{% url 'catalog:index' %}" class="text-white">Home</a></li>
-        <li><a href="{% url 'catalog:contacts' %}" class="text-white">Contacts</a></li>
-        <li><a href="{% url 'catalog:products' %}" class="text-white">All Products</a></li>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'catalog:index' %}" >Home</a></li>
+        <li class="nav-item active">
+            <a href="{% url 'catalog:contacts' %}" class="nav-link">Contact</a></li>
+        <li class="nav-item active">
+            <a href="{% url 'catalog:products' %}" class="nav-link">Products</a></li>
     </ul>
 </div>
