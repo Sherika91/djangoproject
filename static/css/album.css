@@ -1,39 +1,125 @@
 :root {
-  --jumbotron-padding-y: 3rem;
+    --jumbotron-padding-y: 3rem;
 }
 
 .jumbotron {
-  padding-top: var(--jumbotron-padding-y);
-  padding-bottom: var(--jumbotron-padding-y);
-  margin-bottom: 0;
-  background-color: #fff;
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    margin-bottom: 0;
+    background-color: #fff;
 }
+
 @media (min-width: 768px) {
-  .jumbotron {
-    padding-top: calc(var(--jumbotron-padding-y) * 2);
-    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-  }
+    .jumbotron {
+        padding-top: calc(var(--jumbotron-padding-y) * 2);
+        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+    }
 }
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+    font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+    max-width: 40rem;
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+    margin-bottom: .25rem;
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+
+}
+
+/* Add your custom styles here */
+.body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.navbar-toggler {
+    border: none;
+    color: #fff;
+}
+
+.jumbotron {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    margin-bottom: 0;
+}
+
+.album {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+/* Remove hover effect for cards with class 'no-hover' */
+.card.no-hover:hover {
+    transform: none;
+    box-shadow: none;
+    transition: none;
+}
+/* Style for floating label */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    top: 1.5rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.5;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus + .floating-label,
+.form-control:not(:placeholder-shown) + .floating-label {
+    top: 0.25rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    opacity: 1;
+}
