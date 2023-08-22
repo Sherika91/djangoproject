@@ -1,29 +1,42 @@
 <div class="col-md-4">
+    <!-- Outer container for each product card column -->
     <div class="card mb-4 box-shadow border-primary">
+        <!-- Bootstrap card with styling classes -->
         <img class="card-img-top"
              src="/media/{{ product.image }}"
              alt="Card image cap"
              style="height: 350px; width: 100%; display: block">
+        <!-- Product image displayed at the top of the card -->
         <div class="card-body">
+            <!-- Card's main content section -->
             <p class="card-text">{{ product.name|title }}</p>
+            <!-- Product name displayed in title case -->
             <p class="card-text">{{ product.price|floatformat }} $</p>
+            <!-- Product price displayed with floating-point formatting -->
             <hr>
+            <!-- Horizontal line to separate price from description -->
             <p class="card-text">{{ product.description }}</p>
+            <!-- Product description displayed -->
 
             <div class="d-flex justify-content-between ">
+                <!-- Flex container for buttons and stock status -->
                 <div class="btn-group-sm">
+                    <!-- Button group for actions -->
                     <a href="{% url 'catalog:product_detail' product.id %}" type="button"
                        class="btn btn-sm btn-outline-primary">View</a>
+                    <!-- Button to view product details -->
                     <a href="/#/" type="button" class="btn btn-sm btn-outline-primary ">Add to
                         cart</a>
+                    <!-- Button to add product to cart -->
                 </div>
-                <small class="text-success">{% if product.in_stock %}
-                    In stock
-                {% else %}
-                    <small class="text-danger">Out of stock</small>
-
-                {% endif %}
+                <small class="text-success">
+                    {% if product.in_stock %}
+                        In stock
+                    {% else %}
+                        <small class="text-danger">Out of stock</small>
+                    {% endif %}
                 </small>
+                <!-- Display stock status, green for in stock, red for out of stock -->
             </div>
         </div>
     </div>

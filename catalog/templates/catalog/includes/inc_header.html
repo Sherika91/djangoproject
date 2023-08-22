@@ -1,14 +1,19 @@
 <header>
-    <!-- Navigation -->
+    <!-- Header section containing navigation -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <!-- Bootstrap navigation bar with dark background -->
         <div class="container">
-            <a class="navbar-brand" href="#">Your Brand</a>
+            <!-- Container to hold navigation content -->
+            <a class="navbar-brand" href="{% url 'catalog:index' %}">Your Brand</a>
+            <!-- Brand link that redirects to the homepage -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Button to toggle navigation menu on small screens -->
                 <span class="navbar-toggler-icon"></span>
+                <!-- Icon for the navigation toggler button -->
             </button>
             {% include 'catalog/includes/inc_catalog_menu.html' %}
+            <!-- Include a partial template for the navigation menu -->
         </div>
     </nav>
-
 </header>
