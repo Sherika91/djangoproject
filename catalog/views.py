@@ -1,14 +1,21 @@
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render
+
 from catalog.models import Product
 
 
-def index(requests):
-    product_list = Product.objects.all().order_by('-in_stock')[:3]
-    context = {
-        'product_list': product_list,
-        'title': 'Catalog',
-      }
-    return render(requests, 'catalog/index.html', context)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        context['title'] = 'Catalog'
+        return context
+
+    def get_queryset(self):
+        return Product.objects.filter(in_stock=True)
 
 
 def contacts(requests):
@@ -35,11 +42,11 @@ def products(request):
     return render(request, 'catalog/products.html', context)
 
 
-def product_detail(request, id):
-    product = Product.objects.get(id=id)
-    context = {
-        'product': product,
-        'title': product.name,
-    }
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
 
-    return render(request, 'catalog/product_detail.html', context)
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['title'] = 'Product Details'
+        return context

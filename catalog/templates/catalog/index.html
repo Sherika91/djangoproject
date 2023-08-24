@@ -1,6 +1,9 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
-    {% for product in product_list %}
+    <div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'materials:create' %}">Add Materials</a>
+    </div>
+    {% for product in object_list %}
         {% include 'catalog/includes/inc_products.html' %}
     {% endfor %}
 {% endblock %}
