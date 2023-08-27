@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +11,9 @@
     </head>
 
     <body>
-    <div class="row col-12">
+    <div class="row">
         <div class="leftcolumn">
-            <div class="card">
+            <div class="card no-hover">
                 <h2>{{ object.title }}</h2>
                 <h5> {{ object.date_uploaded|date }}</h5>
                 <img class="card-img-top"
@@ -54,5 +55,4 @@
         </div>
     </div>
     </body>
-    </html>
 {% endblock %}
