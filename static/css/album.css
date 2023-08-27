@@ -38,11 +38,15 @@ footer p {
 }
 
 .box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-
+    border-radius: 15px; /* Adjust the radius as desired */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
 }
 
-/* Add your custom styles here */
+.box-shadow:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .body {
     font-family: Arial, sans-serif;
 }
@@ -81,12 +85,14 @@ footer p {
 .card:hover {
     transform: translateY(-5px);
 }
+
 /* Remove hover effect for cards with class 'no-hover' */
 .card.no-hover:hover {
     transform: none;
     box-shadow: none;
     transition: none;
 }
+
 /* Style for floating label */
 .form-group {
     position: relative;

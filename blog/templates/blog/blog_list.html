@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="col-12 mb-5">
-        <a class="btn btn-outline-primary" href="{% url 'materials:create' %}">Add Material</a>
+        <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Add Blog</a>
     </div>
     {% for object in object_list %}
         <div class="col-md-4">
@@ -11,17 +11,17 @@
                     <p class="card-text">{{ object.title }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="{% url 'materials:view' object.pk %}"
+                            <a href="{% url 'blog:detail' object.pk %}"
                                class="btn btn-sm btn-outline-primary">View</a>
-                            <a href="{% url 'materials:edit' object.pk %}"
+                            <a href="{% url 'blog:update' object.pk %}"
                                class="btn btn-sm btn-outline-primary">Edit</a>
-                            <a href="{% url 'materials:delete' object.pk %}"
+                            <a href="{% url 'blog:delete' object.pk %}"
                                class="btn btn-sm btn-outline-danger">Delete</a>
                         </div>
                         {% if object.is_published %}
-                        <a class="btn btn-danger" href="{% url 'materials:toggle_activity' object.pk %}">Deactivate</a>
+                        <a class="btn btn-danger" href="{% url 'blog:toggle_activity' object.pk %}">Deactivate</a>
                         {% else %}
-                        <a class="btn btn-success" href="{% url 'materials:toggle_activity' object.pk %}">Activate</a>
+                        <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Activate</a>
                         {% endif %}
                     </div>
                 </div>

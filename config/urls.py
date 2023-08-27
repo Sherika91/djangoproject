@@ -24,4 +24,5 @@ urlpatterns = [
     # my apps
     path('', include('catalog.urls', namespace='catalog',)),
     path('materials/', include('materials.urls', namespace='materials',)),
+    path('blog/', include('blog.urls', namespace='blog',)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
