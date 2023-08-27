@@ -1,36 +1,40 @@
 {% extends 'catalog/base.html' %}
 {% load static %}
+
 {% block content %}
-    <div class="col-12 mb-5">
-        <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Add Blog</a>
-    </div>
-    {% for object in object_list %}
-        <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Add Blog</a>
+</div>
+{% for object in object_list %}
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <div class="card-body">
+            <img class="card-img-top"
+                src="/media/{{ object.image}}"
+                alt="Card image cap"
+                style="height: 350px; width: 100%; display: block">
             <div class="card-body">
-                <img class="card-img-top"
-                     src="/media/blog{{ product.image }}"
-                     alt="Card image cap"
-                     style="height: 350px; width: 100%; display: block">
-                <div class="card-body">
-                    <p class="card-text">{{ object.title }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="{% url 'blog:detail' object.pk %}"
-                               class="btn btn-sm btn-outline-primary">View</a>
-                            <a href="{% url 'blog:update' object.pk %}"
-                               class="btn btn-sm btn-outline-primary">Edit</a>
-                            <a href="{% url 'blog:delete' object.pk %}"
-                               class="btn btn-sm btn-outline-danger">Delete</a>
-                        </div>
-                        {% if object.is_published %}
-                            <a class="btn btn-danger" href="{% url 'blog:toggle_activity' object.pk %}">Deactivate</a>
-                        {% else %}
-                            <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Activate</a>
-                        {% endif %}
+                <p class="card-text">{{ object.title }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="{% url 'blog:detail' object.pk %}"
+                            class="btn btn-sm btn-outline-primary">View</a>
+                        <a href="{% url 'blog:update' object.pk %}"
+                            class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'blog:delete' object.pk %}"
+                            class="btn btn-sm btn-outline-danger">Delete</a>
                     </div>
+                    {% if object.is_published %}
+                    <a class="btn btn-danger"
+                        href="{% url 'blog:toggle_activity' object.pk %}">Deactivate</a>
+                    {% else %}
+                    <a class="btn btn-success"
+                        href="{% url 'blog:toggle_activity' object.pk %}">Activate</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    {% endfor %}
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
