@@ -1,28 +1,58 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'css/blog_list.css' %}" rel="stylesheet">
+        <title>Your Blog</title>
+    </head>
+
+    <body>
+    <div class="row col-12">
+        <div class="leftcolumn">
             <div class="card">
-                    <div class="card-header">
-                        <img class="card-img-top"
-                             src="/media/{{ object.image }}"
-                             alt="Card image cap"
-                             style="height: 350px; width: 100%; display: block">
-                        <div class="card-body">
-                        <h3 class="card-title">
-                            Material: "{{ object.title }}" | {{ object.slug }}
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <p>{{ object.content }}</p>
-                    </div>
-                    <div class="card-footer">
-                        Views: {{ object.views_count }}
-                    </div>
-                </div>
+                <h2>{{ object.title }}</h2>
+                <h5> {{ object.date_uploaded|date }}</h5>
+                <img class="card-img-top"
+                     src="/media/{{ object.image }}"
+                     alt="Card image cap"
+                     style="height: 350px; width: 100%; display: block">
+                <br>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-sm btn-outline-primary">Like</a>
+                    <a href="#" class="btn btn-sm btn-outline-secondary">Comment</a>
+                    <a href="#" class="btn btn-sm btn-outline-danger">Share</a>
+                </li>
+                <br>
+                <p>{{ object.content }}</p>
+            </div>
+            <div class="card">
+                <h2>Discusion</h2>
+                <p>Some text..</p>
+            </div>
+        </div>
+
+        <div class="rightcolumn">
+            <div class="card">
+                <h2>About Me</h2>
+                <br>
+                <div class="fakeimg" style="height: 100px;">Image</div>
+                <br>
+                <p>Some text about me</p>
+            </div>
+            <div class="card">
+                <h3>Popular Post</h3>
+                <br>
+                <div class="fakeimg">Image</div>
+                <br>
+                <div class="fakeimg">Image</div>
+                <br>
+                <div class="fakeimg">Image</div>
             </div>
         </div>
     </div>
+    </body>
+    </html>
 {% endblock %}
