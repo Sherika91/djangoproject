@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <div class="col-12">
-        <div class="rom">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <div class="mb-3">
                             <button type="submit" class="btn btn-primary">
                                 {% if object %}
                                     Update
@@ -17,10 +19,11 @@
                                     Create
                                 {% endif %}
                             </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

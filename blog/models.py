@@ -5,7 +5,7 @@ NULL_BLANK = {'null': True, 'blank': True}
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title',)
-    slug= models.SlugField(max_length=100, verbose_name='Slug', **NULL_BLANK,)
+    slug = models.SlugField(max_length=100, verbose_name='Slug', **NULL_BLANK,)
     content = models.TextField(verbose_name='Content', **NULL_BLANK,)
     image = models.ImageField(upload_to='blog/', verbose_name='Image Preview', **NULL_BLANK, )
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created',)

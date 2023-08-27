@@ -6,7 +6,12 @@
     </div>
     {% for object in object_list %}
         <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <img class="card-img-top"
+                     src="/media/blog{{ product.image }}"
+                     alt="Card image cap"
+                     style="height: 350px; width: 100%; display: block">
                 <div class="card-body">
                     <p class="card-text">{{ object.title }}</p>
                     <div class="d-flex justify-content-between align-items-center">
@@ -19,9 +24,9 @@
                                class="btn btn-sm btn-outline-danger">Delete</a>
                         </div>
                         {% if object.is_published %}
-                        <a class="btn btn-danger" href="{% url 'blog:toggle_activity' object.pk %}">Deactivate</a>
+                            <a class="btn btn-danger" href="{% url 'blog:toggle_activity' object.pk %}">Deactivate</a>
                         {% else %}
-                        <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Activate</a>
+                            <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Activate</a>
                         {% endif %}
                     </div>
                 </div>

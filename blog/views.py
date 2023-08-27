@@ -30,28 +30,16 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogFormView(CreateView):
-    model = Blog
-    template_name = 'blog/blog_form.html'
-    fields = ['title', 'content']
-    success_url = reverse_lazy('blog:list')
-
-    def get_context_data(self, **kwargs):
-        context = super(BlogFormView, self).get_context_data(**kwargs)
-        context['title'] = 'Blog'
-        return context
-
-
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'image', 'is_published']
     success_url = reverse_lazy('Blog:list')
 
     def form_valid(self, form):
         if form.is_valid():
-            new_material = form.save()
-            new_material.slug = slugify(new_material.title)
-            new_material.save()
+            new_form = form.save()
+            new_form.slug = slugify(new_form.title)
+            new_form.save()
 
             return super().form_valid(form)
 
@@ -61,7 +49,7 @@ class BlogUpdateView(UpdateView):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'image', 'is_published']
     success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):

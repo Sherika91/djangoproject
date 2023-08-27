@@ -1,23 +1,28 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
+    <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Material: "{{ object.title }}" | {{ object.slug }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <p>{{ object.content }}</p>
-                </div>
-                <div class="card-footer">
-                    Views: {{ object.views_count }}
+                    <div class="card-header">
+                        <img class="card-img-top"
+                             src="/media/blog{{ product.image }}"
+                             alt="Card image cap"
+                             style="height: 300px; width: 100%; display: block">
+                        <div class="card-body">
+                        <h3 class="card-title">
+                            Material: "{{ object.title }}" | {{ object.slug }}
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ object.content }}</p>
+                    </div>
+                    <div class="card-footer">
+                        Views: {{ object.views_count }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
