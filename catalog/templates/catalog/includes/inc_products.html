@@ -13,10 +13,17 @@
             <p class="card-text">{{ product.description }}</p>
             <div class="d-flex justify-content-between ">
                 <div class="btn-group-sm">
-                    <a href="{% url 'catalog:product_detail' product.id %}" type="button"
-                       class="btn btn-sm btn-outline-primary">View</a>
-                    <a href="/#/" type="button" class="btn btn-sm btn-outline-primary ">Add to
-                        cart</a>
+                    <a href="{% url 'catalog:product_detail' product.pk %}" type="button"
+                       class="btn btn-sm btn-outline-primary">
+                        View
+                    </a>
+                    <a href="{% url 'catalog:update_product' product.pk %}" type="button"
+                       class="btn btn-sm btn-outline-primary">
+                        Edit
+                    </a>
+                    <a href="/#/" type="button" class="btn btn-sm btn-outline-success ">
+                        Add to cart
+                    </a>
                 </div>
                 {% if product.in_stock %}
                     <span class="text-success">In Stock</span>

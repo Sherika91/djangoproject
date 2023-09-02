@@ -1,7 +1,10 @@
-from django.views.generic import ListView, DetailView, CreateView
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from catalog.models import Product
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
+from django.forms import inlineformset_factory
+
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Version
 
 
 class ProductListView(ListView):
@@ -54,5 +57,72 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ['name', 'description', 'image', 'category', 'price', 'in_stock']
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        product_form_set = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+
+        if self.request.method == 'POST':
+            context_data['formset'] = product_form_set(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = product_form_set(instance=self.object)
+
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:index')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        product_form_set = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+
+        if self.request.method == 'POST':
+            context_data['formset'] = product_form_set(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = product_form_set(instance=self.object)
+
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+        return super().form_valid(form)
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:index')
+
+
+def toggle_activity(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if product.in_stock:
+        product.in_stock = False
+    else:
+        product.in_stock = True
+
+    product.save()
+
+    return redirect(reverse('catalog:products'))
+

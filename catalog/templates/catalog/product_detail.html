@@ -1,18 +1,18 @@
 {% extends 'catalog/base.html' %}
 {% load static %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}
+    {{ product.name }}
+{% endblock %}
 
 {% block content %}
-
     <section class="py-5">
         <div class="container">
             <div class="row gx-5">
                 <aside class="col-lg-6">
-                    <img class="card-img-top"
+                    <img class="card-img-top product-image"
                          src="/media/{{ product.image }}"
-                         alt="Card image cap"
-                         style="height: auto; width: 100%; display: block">
+                         alt="Product Image">
                 </aside>
                 <main class="col-lg-6">
                     <div class="ps-lg-3">
@@ -20,37 +20,39 @@
                             {{ product.title }}
                         </h4>
                         <div class="d-flex flex-row my-3">
-                            <span class="text-success">
-                                {% if product.in_stock %}
-                                    In Stock
-                                {% else %}
-                                    <span class="text-danger">Out of stock</span>
-                                {% endif %}
-                            </span>
+                        <span class="text-success">
+                            {% if product.in_stock %}
+                                In Stock
+                            {% else %}
+                                <span class="text-danger">Out of stock</span>
+                            {% endif %}
+                        </span>
                         </div>
 
                         <div class="row mb-3">
-                            <dt class="col-1">From</dt>
-                            <dd class="col-9"> {{ product.price|floatformat }} $</dd>
+                            <dt class="col-2">Price</dt>
+                            <dd>${{ product.price|floatformat }}</dd>
                         </div>
 
-                        <p>
+                        <p class="product-description">
                             {{ product.description }}
                         </p>
 
                         <div class="row mb-3">
-                            <dt class="col-3">Color</dt>
-                            <dd class="col-9 pd-3"></dd>
-
-                            <div class="col-12 mb-3"></div>
-
-                            <dt class="col-3">Brand</dt>
-                            <dd class="col-9"></dd>
+                            <dt class="col-6">Active Version:</dt>
+                            <dd>
+                                {% for version in product.version_set.all %}
+                                    {% if version.is_active %}
+                                        {{ version.version_number }}
+                                    {% endif %}
+                                {% endfor %}
+                            </dd>
                         </div>
-                        <hr/>
+                        <hr>
                         <div class="btn-group-lg">
-                            <a href="#" class="btn btn-warning"> Buy now </a>
-                            <a href="#" class="btn btn-primary"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart
+                            <a href="#" class="btn btn-warning">Buy Now</a>
+                            <a href="#" class="btn btn-primary">
+                                <i class="me-1 fa fa-shopping-basket"></i> Add to Cart
                             </a>
                         </div>
                     </div>

@@ -34,3 +34,32 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
         ordering = ('name', 'category', 'price', 'date_created', 'in_stock',)
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Subject Name',)
+    description = models.TextField(verbose_name='Description', **NULL_BLANK,)
+
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Product',)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = 'Subject'
+        verbose_name_plural = 'Subjects'
+
+
+class Version(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='Product',)
+    version_name = models.CharField(max_length=100, verbose_name='Version Name',)
+    version_number = models.CharField(max_length=10, verbose_name='Version Number',)
+    is_active = models.BooleanField(default=True, verbose_name='Is Active',)
+
+    def __str__(self):
+        return f'{self.product} - Version {self.version_number}'
+
+    class Meta:
+        verbose_name = 'Version'
+        verbose_name_plural = 'Versions'
+        ordering = ('product', 'version_name', 'version_number',  'is_active',)
