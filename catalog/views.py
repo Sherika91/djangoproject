@@ -60,27 +60,6 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        product_form_set = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-
-        if self.request.method == 'POST':
-            context_data['formset'] = product_form_set(self.request.POST, instance=self.object)
-        else:
-            context_data['formset'] = product_form_set(instance=self.object)
-
-        return context_data
-
-    def form_valid(self, form):
-        formset = self.get_context_data()['formset']
-        self.object = form.save()
-
-        if formset.is_valid():
-            formset.instance = self.object
-            formset.save()
-
-        return super().form_valid(form)
-
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -88,19 +67,27 @@ class ProductUpdateView(UpdateView):
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
+        """Insert the form into the context dict."""
+
         context_data = super().get_context_data(**kwargs)
-        product_form_set = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+
+        version_form_set = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
 
         if self.request.method == 'POST':
-            context_data['formset'] = product_form_set(self.request.POST, instance=self.object)
+            context_data['formset'] = version_form_set(self.request.POST, instance=self.object)
         else:
-            context_data['formset'] = product_form_set(instance=self.object)
+            context_data['formset'] = version_form_set(instance=self.object)
 
         return context_data
 
     def form_valid(self, form):
+        """Called if all forms are valid.
+         Creates a Version instance along with the main Product instance."""
+
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
 
         if formset.is_valid():
             formset.instance = self.object
@@ -124,5 +111,5 @@ def toggle_activity(request, pk):
 
     product.save()
 
-    return redirect(reverse('catalog:products'))
+    return redirect(reverse('catalog:index'))
 
