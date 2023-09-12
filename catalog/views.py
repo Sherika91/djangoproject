@@ -2,15 +2,18 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/index.html'
-    paginate_by = 3
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
@@ -18,7 +21,20 @@ class ProductListView(ListView):
         return context
 
     def get_queryset(self):
-        return Product.objects.filter(in_stock=True)
+        user = self.request.user
+        if user.is_authenticated:
+            if user.is_superuser or user.is_staff:
+                queryset = Product.objects.all()
+            else:
+                queryset = super().get_queryset().filter(
+                    in_stock=True
+                )
+        else:
+            queryset = super().get_queryset().filter(
+                in_stock=False
+            )
+
+        return queryset
 
 
 def contacts(requests):
@@ -36,10 +52,17 @@ def contacts(requests):
 
 
 def products(request):
-    product_list = Product.objects.all()
+    if request.user.is_authenticated:
+        if request.user.is_superuser or request.user.is_staff:
+            product_list = Product.objects.all()
+        else:
+            product_list = Product.objects.filter(in_stock=False)
+    else:
+        product_list = Product.objects.none()  # Return an empty queryset for anonymous users
+
     context = {
         'product_list': product_list,
-        'title': ' Our Products',
+        'title': 'Our Products',
     }
 
     return render(request, 'catalog/products.html', context)
@@ -55,10 +78,16 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class ProductUpdateView(UpdateView):

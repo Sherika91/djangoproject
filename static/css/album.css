@@ -51,20 +51,28 @@ footer p {
     font-family: Arial, sans-serif;
 }
 
-.navbar {
-    background-color: #343a40;
+/* Navigation menu styles */
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.navbar-brand {
-    color: #fff;
-    font-size: 1.5rem;
+.navbar-nav li {
+    margin-right: 20px; /* Adjust the spacing between menu items */
+}
+
+.navbar-nav a {
     text-decoration: none;
+    color: #333; /* Change to your preferred text color */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
-.navbar-toggler {
-    border: none;
-    color: #fff;
+.navbar-nav a:hover {
+    color: #007bff; /* Change to your preferred text color on hover */
 }
+
 
 .jumbotron {
     background-color: #f8f9fa;
@@ -128,27 +136,4 @@ footer p {
     left: 0.75rem;
     font-size: 0.75rem;
     opacity: 1;
-}
-.footer {
-    background-color: #333; /* Dark background color */
-    color: white; /* Text color */
-    padding: 30px 0; /* Add padding for better spacing */
-}
-
-.footer h4 {
-    color: #f0ad4e; /* Heading color */
-}
-
-.footer a {
-    color: #f0ad4e; /* Link color */
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: #d9534f; /* Link color on hover */
-}
-
-.footer hr {
-    border-color: #555; /* Horizontal line color */
-    margin-top: 20px; /* Add spacing above the line */
 }

@@ -1,7 +1,11 @@
 .footer {
+    flex-shrink: 0;
     background-color: #333; /* Dark background color */
     color: white; /* Text color */
-    padding: 30px 0; /* Add padding for better spacing */
+    padding: 30px; /* Add padding for better spacing */
+    width: 100%;
+    bottom: 0;
+    text-align: center;
 }
 
 .footer h4 {
@@ -21,3 +25,40 @@
     border-color: #555; /* Horizontal line color */
     margin-top: 20px; /* Add spacing above the line */
 }
+
+/* Apply styles to the footer element */
+
+/* Ensure the footer is at the bottom of the page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Make the container expand to fill the remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Center-align the content inside the container */
+.container .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style the links and copyright notice */
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Add any other styles as needed */

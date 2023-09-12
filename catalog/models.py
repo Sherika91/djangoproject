@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 NULL_BLANK = {'null': True, 'blank': True}
 
 
@@ -26,6 +28,7 @@ class Product(models.Model):
     date_last_updated = models.DateTimeField(auto_now=True, verbose_name='Date Last Updated',)
 
     in_stock = models.BooleanField(default=True, verbose_name='In Stock',)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='owner', **NULL_BLANK,)
 
     def __str__(self):
         return f"{self.name} {self.category} {self.price} {self.date_created}"
